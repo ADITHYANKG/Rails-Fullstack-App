@@ -1,0 +1,49 @@
+<nav class="fixed w-full top-0 bg-black shadow-md z-50 py-4">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center h-16">
+      
+      <!-- Left Side: Logo -->
+      <div class="flex-shrink-0">
+        <%= link_to root_path do %>
+          <%= image_tag 'Screenshot_2025-02-13_120454-removebg-preview.png', class: "h-12 sm:h-14 md:h-16 lg:h-20 w-auto" %>
+        <% end %>
+      </div>
+
+      <!-- Middle: Navigation Links -->
+      <div class="hidden sm:flex items-center space-x-10">
+        <%= link_to 'Home', root_path, class: "text-white hover:underline   sm:text-sm md:text-base lg:text-base font-medium" %>
+      </div>
+    
+      <!-- Right Side: User Authentication & Cart -->
+      <div class="flex items-center space-x-6">
+        <% if user_signed_in? %>
+          <%= link_to "Orders", orders_path, class: "text-white text-xs  sm:text-xs md:text-base lg:text-base hover:underline text-md font-medium" %>
+          <%= button_to "Logout", destroy_user_session_path, method: :delete, class: "text-white text-xs  sm:text-xs md:text-base lg:text-base hover:underline text-md font-medium bg-transparent border-none" %>
+          <span class="text-white text-xs  sm:text-xs md:text-base lg:text-base font-semibold">Hi, <%= current_user.name %></span>
+        <% else %>
+          <%= link_to "Sign Up", new_user_registration_path, class: "text-white text-xs  sm:text-xs md:text-base lg:text-base hover:underline text-md font-medium" %>
+          <div>
+            <i class="far fa-user-circle fa-lg text-white"></i>
+            <%= link_to "Login", new_user_session_path, class: "text-white text-xs  sm:text-xs md:text-base lg:text-base hover:underline text-md font-medium" %>
+          </div>
+        <% end %>
+
+        <!-- Cart Icon -->
+   <div data-controller="cart" class="relative">
+  <%= link_to cart_path, class: "text-white text-md font-medium flex items-center relative", id: "cart-link" do %>
+    <i class="fas fa-shopping-cart mr-2 text-xs sm:text-xs md:text- base lg:text-base"></i> 
+  <% end %>
+
+  <!-- Cart Count Badge (Correctly Overlapping) -->
+  <span id="cart-count" class="absolute -top-2 -right-2 z-20 bg-red-600 text-white rounded-full text-xs px-2 py-0.5 hidden">
+    0
+  </span>
+</div>
+
+
+      </div>
+    </div>
+  </div>
+</nav>
+
+

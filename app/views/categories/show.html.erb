@@ -1,0 +1,37 @@
+<h1 class="text-4xl sm:text-5xl font-bold text-center text-gray-900 mt-10"><%= @category.name %> </h1>
+<div class="min-h-screen flex flex-col items-center px-4 sm:px-6 lg:px-8 pb-20 sm:pb-32">
+    <div class="w-full max-w-7xl grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 sm:gap-8 mt-8 
+                grid-auto-rows-min flex-grow">
+        <% if @products.empty? %>
+            <p class="text-2xl text-center text-gray-800 col-span-full">No products available</p>
+        <% else %>
+            <% @products.each do |product| %>
+                <%= link_to product_path(product), class: "block" do %>
+                    <!-- Responsive Card with Fixed Height -->
+                    <div class="bg-white shadow-lg rounded-lg overflow-hidden transform hover:scale-105 transition duration-300 
+                                p-4 w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg mx-auto flex flex-col h-[350px] sm:h-[400px] md:h-[450px] lg:h-[500px]">
+    
+                        <!-- Image Section (Scales with Card) -->
+                        <div class="w-full flex items-center justify-center h-2/5">
+                            <%= product.images.first ? image_tag(product.images.first.variant(:medium), class: "w-full h-full object-contain rounded-t-md") : image_tag("http://via.placeholder.com/250", class: "w-full h-full object-contain rounded-t-md") %>
+                        </div>
+
+                        <!-- Content Section (Expands Dynamically) -->
+                        <div class="p-4 text-center flex-grow flex flex-col justify-between">
+                            <h3 class="text-xs sm:text-sm md:text-base lg:text-lg font-semibold text-gray-900"><%= product.name %></h3>
+                            <p class="text-gray-600 text-xs sm:text-sm md:text-base mt-2 flex-grow"><%= product.description.truncate(100) %></p>
+                            <p class="text-xs sm:text-sm md:text-base lg:text-lg font-bold text-gray-900 mt-3">Rs. <%= product.price %></p>
+                        </div>
+
+                        <!-- Button (Always at Bottom) -->
+                        <div class="p-4 mt-auto w-full">
+                            <button class="w-full bg-black text-white py-2 px-4 rounded-md hover:bg-gray-800 transition text-xs sm:text-sm md:text-base">
+                                View Details
+                            </button>
+                        </div>
+                    </div>
+                <% end %>
+            <% end %>
+        <% end %>
+    </div>
+</div>

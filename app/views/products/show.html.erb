@@ -1,0 +1,77 @@
+<h1 class="text-3xl sm:text-4xl font-bold text-center text-gray-900 mt-10">Details</h1>
+
+<div class="container mx-auto min-h-screen flex-grow  px-4 sm:px-6 lg:px-8 py-10">
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+    
+    <!-- Product Images (Now Styled & Positioned Correctly) -->
+    <div class="flex flex-wrap justify-center gap-4">
+      <% @product.images.each do |image| %>
+        <div class="w-60 sm:w-64 md:w-72 lg:w-96 h-60 sm:h-64 md:h-72 lg:h-96 bg-white shadow-lg rounded-lg flex items-center justify-center p-2">
+          <%= image_tag image, class: "w-full h-full object-contain rounded-md" %>
+        </div>
+      <% end %>
+    </div>
+
+    <!-- Product Details & Cart -->
+    <div 
+      data-controller="products" 
+      data-products-product-value='<%= @product.to_json(include: :stocks) %>' 
+      class="flex flex-col items-center lg:items-start max-w-md mx-auto lg:mx-0"
+      >
+
+      <h1 class="font-bold text-3xl sm:text-4xl uppercase text-center lg:text-left text-gray-900"><%= @product.name %></h1>
+      <p class="text-xl sm:text-2xl font-bold  text-gray-700 mt-2">Rs. <%= (sprintf("%.2f", @product.price)).to_s %></p>
+      <p class="text-md sm:text-lg text-gray-600 mt-4 text-center lg:text-left"><%= @product.description %></p>
+
+      <!-- Size Selection -->
+      <div class="my-6">
+        <p class="uppercase text-sm font-semibold text-gray-800">Size</p>
+        <div class="flex flex-wrap gap-3 mt-2">
+          <% @product.stocks.each do |stock| %>
+            <% if stock.amount > 0 %>
+              <button 
+                data-action="click->products#selectSize"
+                value="<%= stock.size %>"
+                class="bg-gray-200 text-gray-800 font-semibold py-2 px-4 rounded-lg hover:bg-gray-300 transition duration-300"
+              >
+                <%= stock.size %>
+              </button>
+            <% else %>
+              <button 
+                disabled
+                value="<%= stock.size %>"
+                class="disabled:bg-gray-300 bg-gray-200 text-gray-500 font-semibold py-2 px-4 rounded-lg opacity-50 cursor-not-allowed"
+              >
+                <%= stock.size %>
+              </button>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+
+      <!-- Selected Size Display -->
+      <div id="selected-size" class="mt-2 font-semibold text-gray-900"></div>
+
+      <!-- Add to Cart Button -->
+      
+      <% if user_signed_in? %>
+    
+       <button 
+        data-action="click->products#addToCart"
+        class="mt-6 w-full sm:w-auto px-6 py-3 text-lg font-medium rounded-lg text-white bg-gray-900 hover:bg-gray-800 transform hover:scale-105 transition duration-300"
+      >
+        Add to Cart
+      </button>
+      <% else %>
+       <%= link_to "Add to cart" , new_user_session_path,
+        
+        class:"mt-6 w-full sm:w-auto px-6 py-3 text-lg font-medium rounded-lg text-white bg-gray-900 hover:bg-gray-800 transform hover:scale-105 transition duration-300"
+      
+      
+      %>
+
+      <% end %>
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,52 @@
+<% content_for :title, "Products" %>
+
+<div class="w-full p-6">
+  <% if notice.present? %>
+    <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-md inline-block" id="notice"><%= notice %></p>
+  <% end %>
+
+  <!-- Header Section -->
+  <div class="flex justify-between items-center mb-6">
+    <h1 class="font-bold text-3xl sm:text-4xl">Products</h1>
+    <%= link_to "New Product", new_admin_product_path, class: "rounded-md px-4 py-2.5 bg-black/100 hover:bg-black/75 text-white font-medium" %>
+  </div>
+
+  <!-- Responsive Table -->
+  <div class="overflow-x-auto bg-white shadow-md rounded-lg p-4">
+    <table class="w-full table-auto min-w-full border-collapse">
+      <thead class="bg-gray-200 border-b">
+        <tr>
+          <th class="px-6 py-4 text-left text-sm font-medium text-gray-800">Image</th>
+          <th class="px-6 py-4 text-left text-sm font-medium text-gray-800">Name</th>
+          <th class="px-6 py-4 text-left text-sm font-medium text-gray-800">Description</th>
+          <th class="px-6 py-4 text-left text-sm font-medium text-gray-800">Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @admin_products.each do |product| %>
+          <tr class="border-b even:bg-gray-100 hover:bg-gray-50 transition">
+            <!-- Product Image -->
+            <td class="px-6 py-4">
+              <%= product.images.any? ? image_tag(product.images.first.variant(:thumb), class: "w-12 h-12 object-cover rounded-md") : image_tag("http://via.placeholder.com/50", class: "w-12 h-12 object-cover rounded-md") %>
+            </td>
+
+            <!-- Product Name -->
+            <td class="px-6 py-4">
+              <%= link_to product.name, admin_product_path(product), class: "text-blue-600 hover:underline font-medium" %>
+            </td>
+
+            <!-- Product Description -->
+            <td class="px-6 py-4 text-gray-700 text-sm sm:text-base">
+              <%= product.description.truncate(50) %>
+            </td>
+
+            <!-- Product Price -->
+            <td class="px-6 py-4 font-semibold text-gray-900">
+              Rs.<%= product.price %>.00
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

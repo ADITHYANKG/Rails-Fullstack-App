@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= content_for(:title) || "Vyora" %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+<%= favicon_link_tag 'favicon.ico' %>
+
+
+
+
+    <meta name="mobile-web-app-capable" content="yes">
+     <%= javascript_importmap_tags %>
+    <%= csrf_meta_tags %>
+
+    <%= csp_meta_tag %>
+
+    <%= yield :head %>
+<%# <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module",defer:true %> <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+     
+    <link rel="manifest" href="/manifest.json">
+    <link rel="icon" href="/icon.png" type="image/png">
+    <link rel="icon" href="/icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/icon.png">
+    <%# <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
+
+   <%= stylesheet_link_tag 'application', media: 'all', 'data-turbo-track': 'reload' %>
+
+  </head>
+
+  <body  >
+    <% unless admin_controller? %>
+    <%= render "layouts/shared/navbar" %>
+    <% end %>
+    <main class=" mx-auto mt-28 w-full px-2 sm:px-6 lg:px-8">
+      <%= yield %>
+    </main>
+    <% unless admin_controller? %>
+    <%= render "layouts/shared/footer" %>
+     <% end %>
+  </body>
+</html>

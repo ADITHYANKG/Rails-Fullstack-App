@@ -1,0 +1,67 @@
+<% content_for :title, "Orders" %>
+
+<div class="w-full p-6">
+  <% if notice.present? %>
+    <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-md inline-block" id="notice"><%= notice %></p>
+  <% end %>
+
+  <!-- Header Section -->
+  <div class="flex justify-between items-center mb-6">
+    <h1 class="font-bold text-3xl sm:text-4xl">Orders</h1>
+    
+  </div>
+
+  <!-- Unfulfilled Orders Section -->
+  <h2 class="text-2xl font-semibold mb-4 text-gray-800">Unfulfilled Orders</h2>
+  <div class="overflow-x-auto bg-white shadow-md rounded-lg p-4 mb-10">
+    <table class="w-full table-auto min-w-full border-collapse">
+      <thead class="bg-gray-200 border-b">
+        <tr>
+          <th class="px-6 py-4 text-left text-sm font-medium text-gray-800">Order ID</th>
+          <th class="px-6 py-4 text-left text-sm font-medium text-gray-800">Customer Email</th>
+          <th class="px-6 py-4 text-left text-sm font-medium text-gray-800">Address</th>
+          <th class="px-6 py-4 text-left text-sm font-medium text-gray-800">Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @not_fulfilled_orders.each do |order| %>
+          <tr class="border-b even:bg-gray-100 hover:bg-gray-50 transition">
+            <td class="px-6 py-4">
+              <%= link_to order.id, [:admin, order], class: "text-blue-600 hover:underline font-medium" %>
+            </td>
+            <td class="px-6 py-4 text-gray-700 text-sm sm:text-base"><%= order.email %></td>
+            <td class="px-6 py-4 text-gray-700 text-sm sm:text-base"><%= order.address %></td>
+            <td class="px-6 py-4 font-semibold text-gray-900">Rs.<%= order.total %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Fulfilled Orders Section -->
+  <h2 class="text-2xl font-semibold mb-4 text-gray-800">Fulfilled Orders</h2>
+  <div class="overflow-x-auto bg-white shadow-md rounded-lg p-4">
+    <table class="w-full table-auto min-w-full border-collapse">
+      <thead class="bg-gray-200 border-b">
+        <tr>
+          <th class="px-6 py-4 text-left text-sm font-medium text-gray-800">Order ID</th>
+          <th class="px-6 py-4 text-left text-sm font-medium text-gray-800">Customer Email</th>
+          <th class="px-6 py-4 text-left text-sm font-medium text-gray-800">Address</th>
+          <th class="px-6 py-4 text-left text-sm font-medium text-gray-800">Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @fulfilled_orders.each do |order| %>
+          <tr class="border-b even:bg-gray-100 hover:bg-gray-50 transition">
+            <td class="px-6 py-4">
+              <%= link_to order.id, [:admin, order], class: "text-blue-600 hover:underline font-medium" %>
+            </td>
+            <td class="px-6 py-4 text-gray-700 text-sm sm:text-base"><%= order.email %></td>
+            <td class="px-6 py-4 text-gray-700 text-sm sm:text-base"><%= order.address %></td>
+            <td class="px-6 py-4 font-semibold text-gray-900">Rs.<%= order.total %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

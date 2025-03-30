@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= content_for(:title) || "Vyora" %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="mobile-web-app-capable" content="yes">
+    <%= favicon_link_tag 'favicon.ico' %>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= javascript_importmap_tags %>
+    <%= yield :head %>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="icon" href="/icon.png" type="image/png">
+    <link rel="icon" href="/icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/icon.png">
+    <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    
+  </head>
+
+  <body>
+    <main class=" flex  ">
+      <nav class="flex  w-40 sm:w-48 md:w-56 lg:w-64 ">
+        <div class="w-full p-4 h-screen bg-black sticky top-0">
+          <div class="flex">
+            <h1 class="text-md py-2 text-gray-50 font-bold  md:block">Admin</h1>
+          </div>
+          <ul class="flex flex-col text-gray-50">
+            <li>
+              <%= link_to admin_path, class:"block px-4 py-2 hover:rounded hover:bg-gray-700"  do  %>
+              <%= icon('fa-solid','gauge-high' , class: 'mr-4') %><span class=" md:inline-block">Dashboard</span>
+              <% end %>
+            </li>
+             <li>
+              <%= link_to admin_products_path, class:"block px-4 py-2 hover:rounded hover:bg-gray-700"  do  %>
+              <%= icon('fa-solid','cart-shopping' , class: 'mr-4') %><span class=" md:inline-block">Products</span>
+              <% end %>
+            </li>
+             <li>
+              <%= link_to admin_categories_path, class:"block px-4 py-2 hover:rounded hover:bg-gray-700"  do  %>
+              <%= icon('fa-solid','list' , class: 'mr-4') %><span class=" md:inline-block">Categories</span>
+              <% end %>
+            </li>
+             <li>
+              <%= link_to admin_orders_path, class:"block px-4 py-2 hover:rounded hover:bg-gray-700"  do  %>
+              <%= icon('fa-solid','truck-fast' , class: 'mr-4') %><span class=" md:inline-block">Orders</span>
+              <% end %>
+            </li>
+           <li>
+ <%= button_to destroy_admin_session_path, method: :delete, onclick: "return confirm('Are you sure you want to sign out?');", class: "block px-4 py-2 hover:rounded hover:bg-gray-700 w-full text-left" do %>
+  <%= icon('fa-solid', 'sign-out', class: 'mr-4') %><span class="md:inline-block">Sign Out</span>
+<% end %>
+</li>
+
+          </ul>
+        </div>
+      </nav>
+      <div class="p-4 bg-red-50 w-full">
+        <%= yield %>
+      </div>
+    </main>
+  </body>
+</html>
+ 

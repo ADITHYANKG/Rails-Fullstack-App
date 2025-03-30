@@ -1,0 +1,55 @@
+<div class="min-h-screen flex flex-col items-center justify-center bg-gray-100 px-4 sm:px-6 lg:px-8">
+  <p class="text-sm sm:text-lg md:text-xl lg:text-2xl text-dark font-bold">Create a new Admin Account</p>
+  <br><br>
+  
+  <div class="w-full max-w-md bg-white shadow-xl rounded-2xl p-8">
+    
+    <!-- Admin Sign Up Heading -->
+    <h2 class="text-3xl sm:text-4xl font-bold text-center text-gray-900">Admin Sign Up</h2>
+    <p class="text-center text-gray-500 mt-2">Register as an admin to manage the platform</p>
+
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: "mt-6 space-y-6" }) do |f| %>
+
+      <!-- Error Messages -->
+      <%= render "admins/shared/error_messages", resource: resource %>
+
+      <!-- Email Field -->
+      <div class="space-y-2">
+        <%= f.label :email, "Email Address", class: "block text-gray-700 font-medium" %>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", required: true, class: "w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-gray-900 focus:outline-none" %>
+      </div>
+
+      <!-- Password Field -->
+      <div class="space-y-2">
+        <%= f.label :password, "Password", class: "block text-gray-700 font-medium" %>
+        <% if @minimum_password_length %>
+          <em class="text-sm text-gray-500">(<%= @minimum_password_length %> characters minimum)</em>
+        <% end %>
+        <%= f.password_field :password, autocomplete: "new-password", required: true, class: "w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-gray-900 focus:outline-none" %>
+      </div>
+
+      <!-- Password Confirmation Field -->
+      <div class="space-y-2">
+        <%= f.label :password_confirmation, "Confirm Password", class: "block text-gray-700 font-medium" %>
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", required: true, class: "w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-gray-900 focus:outline-none" %>
+      </div>
+
+      <br>
+
+      <!-- Submit Button -->
+      <div>
+        <%= f.submit "Sign Up", class: "w-full bg-gray-900 hover:bg-gray-800 text-white py-3 rounded-lg font-semibold transition duration-300 shadow-md" %>
+      </div>
+
+    <% end %>
+
+    <!-- Already have an account? -->
+    <div class="mt-6 text-center">
+      <p class="text-gray-600">
+        Already have an account?
+        <%= link_to "Sign In", new_admin_session_path, class: "text-blue-600 hover:text-blue-500 font-medium" %>
+      </p>
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,32 @@
+<h2 class="text-xl font-bold text-center">Edit Profile</h2>
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :patch }) do |f| %>
+  <div>
+    <%= f.label :name, "Full Name" %>
+    <%= f.text_field :name, required: true, class: "w-full p-2 border rounded" %>
+  </div>
+
+  <div class="mt-2">
+    <%= f.label :email %>
+    <%= f.email_field :email, required: true, class: "w-full p-2 border rounded" %>
+  </div>
+
+  <div class="mt-2">
+    <%= f.label :password %> (leave blank if you don't want to change it)
+    <%= f.password_field :password, class: "w-full p-2 border rounded" %>
+  </div>
+
+  <div class="mt-2">
+    <%= f.label :password_confirmation %>
+    <%= f.password_field :password_confirmation, class: "w-full p-2 border rounded" %>
+  </div>
+
+  <div class="mt-2">
+    <%= f.label :current_password, "Current Password (required to save changes)" %>
+    <%= f.password_field :current_password, required: true, class: "w-full p-2 border rounded" %>
+  </div>
+
+  <div class="mt-4">
+    <%= f.submit "Update", class: "bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded" %>
+  </div>
+<% end %>
