@@ -64,7 +64,7 @@ group :test do
 end
  # PostgreSQL database adapter
 gem 'pg'
-gem "font-awesome-sass" , "~>6.5.1"
+gem "font-awesome-sass" , "~>6.7.2"
 gem "devise", "~> 4.9"
 
 gem "stripe", "~> 13.4"
