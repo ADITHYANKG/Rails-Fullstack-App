@@ -67,4 +67,4 @@ gem 'pg'
 gem "font-awesome-sass" , "~>6.5.1"
 gem "devise", "~> 4.9"
 
-gem "stripe", "~> 13.4"
+gem "stripe", "~> 15.0"
