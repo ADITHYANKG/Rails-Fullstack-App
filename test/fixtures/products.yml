@@ -1,0 +1,13 @@
+one:
+  name: Wireless Earbuds
+  description: Bluetooth earbuds with charging case
+  price: 1999
+  category: one
+  active: true
+
+two:
+  name: Cotton T-Shirt
+  description: Plain crew-neck t-shirt
+  price: 499
+  category: two
+  active: true

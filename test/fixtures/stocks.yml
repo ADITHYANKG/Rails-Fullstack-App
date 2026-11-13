@@ -1,0 +1,9 @@
+one:
+  product: one
+  amount: 10
+  size: Standard
+
+two:
+  product: two
+  amount: 5
+  size: M

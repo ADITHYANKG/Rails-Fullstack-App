@@ -1,0 +1,11 @@
+one:
+  email: customer1@example.com
+  fulfilled: false
+  total: 1999
+  address: 1 Test Street
+
+two:
+  email: customer2@example.com
+  fulfilled: true
+  total: 499
+  address: 2 Test Street

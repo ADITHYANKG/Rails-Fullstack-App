@@ -64,4 +64,10 @@ Rails.application.configure do
 
   # Raise error when a before_action's only/except options reference missing actions.
   config.action_controller.raise_on_missing_callback_actions = true
+
+  # Windows: keep the Sprockets asset cache in memory instead of tmp/cache/assets.
+  # The file cache fails here with "Permission denied @ rb_file_s_rename".
+  config.assets.configure do |env|
+    env.cache = Sprockets::Cache::MemoryStore.new(5000)
+  end
 end
