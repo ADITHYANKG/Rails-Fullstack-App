@@ -1,0 +1,24 @@
+{
+  "dependencies": {
+    "@fontsource/inter": "^5.1.1",
+    "@rails/ujs": "^7.1.3-4"
+  },
+  "devDependencies": {
+    "tailwindcss": "^4.0.0"
+  },
+  "name": "ecommerse",
+  "version": "1.0.0",
+  "description": "This README would normally document whatever steps are necessary to get the application up and running.",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs"
+}
