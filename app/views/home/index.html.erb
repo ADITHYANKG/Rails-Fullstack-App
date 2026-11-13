@@ -37,11 +37,33 @@
     </div>
 </div>
 
-<div class="bg-black text-white my-10 text-center py-20 w-full">
-    <h2 class="text-3xl font-bold mb-6">Stay Updated</h2>
-    <p class="mb-8">Subscribe to our newsletter for the latest updates and offers</p>
-    <%= form_with url: root_path, method: :post, local: true, class: "flex justify-center" do %>
-        <%= email_field_tag :email, nil, placeholder: "Enter your email", class: "py-2 px-4 rounded-l text-gray-800 w-64" %>
-        <%= submit_tag "Subscribe", class: "bg-gray-700 hover:bg-gray-800 cursor-pointer text-white font-bold py-2 px-4 rounded-r" %>
-    <% end %>
-</div>
+<section id="newsletter" class="bg-black text-white my-10 py-12 sm:py-16 md:py-20 px-4 sm:px-6 w-full scroll-mt-28">
+    <div class="max-w-xl mx-auto text-center">
+        <h2 class="text-2xl sm:text-3xl font-bold mb-3 sm:mb-4">Stay Updated</h2>
+        <p class="text-sm sm:text-base text-gray-300 mb-6 sm:mb-8">Subscribe to our newsletter for the latest updates and offers</p>
+
+        <% if (newsletter = flash[:newsletter]) %>
+            <% styles = {
+                 "success" => "bg-green-900/60 border-green-500 text-green-100",
+                 "info"    => "bg-blue-900/60 border-blue-400 text-blue-100",
+                 "error"   => "bg-red-900/60 border-red-500 text-red-100"
+               } %>
+            <div role="<%= newsletter["type"] == "error" ? "alert" : "status" %>"
+                 class="w-full max-w-md mx-auto mb-4 px-4 py-3 rounded-md border text-sm sm:text-base <%= styles.fetch(newsletter["type"], styles["info"]) %>">
+                <%= newsletter["message"] %>
+            </div>
+        <% end %>
+
+        <%= form_with url: subscribers_path, method: :post,
+              class: "flex flex-col sm:flex-row items-stretch gap-3 sm:gap-0 w-full max-w-md mx-auto" do %>
+            <%= label_tag :email, "Email address", class: "sr-only" %>
+            <%= email_field_tag :email, flash[:newsletter_email],
+                  placeholder: "Enter your email",
+                  required: true,
+                  autocomplete: "email",
+                  class: "flex-1 min-w-0 w-full bg-white text-gray-900 placeholder:text-gray-500 border border-gray-300 rounded-md sm:rounded-r-none px-4 py-3 text-base focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-red-600" %>
+            <%= submit_tag "Subscribe",
+                  class: "w-full sm:w-auto shrink-0 bg-red-700 hover:bg-red-800 active:bg-red-900 text-white font-bold px-6 py-3 rounded-md sm:rounded-l-none cursor-pointer transition-colors focus:outline-none focus:ring-2 focus:ring-red-400" %>
+        <% end %>
+    </div>
+</section>

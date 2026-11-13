@@ -51,6 +51,9 @@ post 'orders', to: 'orders#create'
 
 
 post "checkout" =>"checkouts#create"
+
+# Newsletter sign-up form ("Stay Updated" section on the home page)
+resources :subscribers, only: [:create]
  
   # Defines the root path route ("/")
   # root "posts#index"
